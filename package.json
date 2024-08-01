@@ -1,0 +1,27 @@
+{
+  "name": "microshield-token-gen",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "ci": "tsx sources/index.ts"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "es-toolkit": "^1.13.1",
+    "got": "^14.4.2",
+    "memfs": "^4.11.0",
+    "p-limit": "^6.1.0",
+    "simple-git": "^3.25.0",
+    "ts-morph": "^23.0.0",
+    "tsx": "^4.16.3",
+    "typescript": "^5.5.4",
+    "webcrack": "^2.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.0",
+    "typescript-eslint": "^7.18.0"
+  }
+}

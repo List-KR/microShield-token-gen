@@ -1,0 +1,26 @@
+name: 'Capture Ad-Shield remote token'
+author: 'PiQuark6046, Adguard Software Ltd and contributors'
+
+inputs:
+  config:
+    description: 'Configuration file name'
+    required: true
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install npm packages
+      run: |
+        npm i
+      shell: bash
+      working-directory: ${{ github.action_path }}
+    - name: Run program
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        REPO: ${{ github.workspace }}
+        CONFIG: ${{ inputs.config }}
+      run: |
+        npm run ci -- --token "$GITHUB_TOKEN" --repo "$REPO" --config "$CONFIG"
+      shell: bash
+      working-directory: ${{ github.action_path }}
