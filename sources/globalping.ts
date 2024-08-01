@@ -3,8 +3,7 @@ import * as Got from 'got'
 export type TContinent = 'AF' | 'AN' | 'AS' | 'EU' | 'NA' | 'OC' | 'SA'
 export type TRegion = 'Northern Africa' | 'Eastern Africa' | 'Middle Africa' | 'Southern Africa' | 'Western Africa' | 'Caribbean' | 'Central America' | 'South America' | 'Northern America' | 'Central Asia' | 'Eastern Asia' | 'South-eastern Asia' | 'Southern Asia' | 'Western Asia' | 'Eastern Europe' | 'Northern Europe' | 'Southern Europe' | 'Western Europe' | 'Australia and New Zealand' | 'Melanesia' | 'Micronesia' | 'Polynesia'
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export async function PostCode(TargetUrl: string, headers: Record<string, string>, Continent: TContinent) {
+export async function PostCode(TargetUrl: string, Headers: Record<string, string>, Continent: TContinent) {
   const URLInstance = new URL(TargetUrl)
   const Result = await Got.got('https://api.globalping.io/v1/measurements', {
     method: 'POST',
@@ -23,12 +22,10 @@ export async function PostCode(TargetUrl: string, headers: Record<string, string
         continent: Continent
       }],
       measurementOptions: {
-        HttpOptions: {
-          request: {
-            path: URLInstance.pathname,
-            method: 'GET',
-            headers
-          }
+        request: {
+          path: URLInstance.pathname,
+          method: 'GET',
+          headers: Headers
         }
       }
     })
