@@ -2,8 +2,8 @@ name: 'Capture Ad-Shield remote token'
 author: 'PiQuark6046, Adguard Software Ltd and contributors'
 
 inputs:
-  config:
-    description: 'Configuration file name'
+  target:
+    description: 'Target file'
     required: true
     default: ''
 
@@ -18,9 +18,9 @@ runs:
     - name: Run program
       env:
         GITHUB_TOKEN: ${{ github.token }}
-        REPO: ${{ github.workspace }}
-        CONFIG: ${{ inputs.config }}
+        REPO: ${{ github.repository }}
+        TARGET: ${{ inputs.target }}
       run: |
-        npm run ci -- --token "$GITHUB_TOKEN" --repo "$REPO" --config "$CONFIG"
+        npm run ci -- --token "$GITHUB_TOKEN" --repo "$REPO" --target "$TARGET"
       shell: bash
       working-directory: ${{ github.action_path }}
