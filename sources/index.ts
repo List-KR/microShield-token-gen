@@ -19,10 +19,14 @@ const RawCode = Fs.readFileSync(ProgramOptions.target, 'utf8')
 const SHA = await StringToSHA1HEX(RawCode)
 Fs.writeFileSync(`/tmp/${SHA}`, RawCode)
 const ExtractedToken = ExtractCode((await webcrack(Fs.readFileSync(`/tmp/${SHA}`, 'utf8'))).code)
-await GitHubInstance.repos.createOrUpdateFileContents({
-  owner: ProgramOptions.repo.split('/')[0],
-  repo: ProgramOptions.repo.split('/')[1],
-  path: `${Current.getUTCFullYear()}/${Current.getUTCMonth()}/${Current.getUTCDate()}/${SHA}.token`,
-  message: `Update for ${SHA}`,
-  content: btoa(ExtractedToken)
-})
+try {
+  await GitHubInstance.repos.createOrUpdateFileContents({
+    owner: ProgramOptions.repo.split('/')[0],
+    repo: ProgramOptions.repo.split('/')[1],
+    path: `${Current.getUTCFullYear()}/${Current.getUTCMonth()}/${Current.getUTCDate()}/${SHA}.token`,
+    message: `Update for ${SHA}`,
+    content: btoa(ExtractedToken)
+  })
+} catch (Err) {
+  console.log(Err)
+}
